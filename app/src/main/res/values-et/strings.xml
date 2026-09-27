@@ -76,8 +76,6 @@
     <string name="playbackbottomsheet_str_30x">3.0x</string>
     <string name="songinfobottomsheet_details">Üksikasjad</string>
     <string name="songinfobottomsheet_fetching">Laadin…</string>
-    <string name="updatebottomsheet_install">Paigalda</string>
-    <string name="updatebottomsheet_update">Uuenda</string>
     <string name="autoeqprofileselector_all">Kõik</string>
     <string name="fullscreenlyricsview_translation">Tõlge</string>
     <string name="lyricseditorbottomsheet_str_500ms">500 msek</string>
@@ -87,12 +85,10 @@
     <string name="rhythmnavigation_stream">Voogedastus</string>
     <string name="expressiveplayerscreen_more">Veel</string>
     <string name="expressiveplayerscreen_device">Seade</string>
-    <string name="expressiveplayerscreen_load">Laadi</string>
     <string name="apimanagementsettingsscreen_lyrically">Lyrically</string>
     <string name="apimanagementsettingsscreen_github">GitHub</string>
     <string name="rhythmstatsscreen_top_songs">Populaarsed lood</string>
     <string name="rhythmstatsscreen_listening_habits">Kuulamisharjumused</string>
-    <string name="rhythmstatsscreen_listening_timeline">Kuulamiste ajajoon</string>
     <string name="playerscreen_select_artist">Vali esitaja</string>
     <string name="playerscreen_open_artist">Ava esitaja teave</string>
     <string name="aboutscreen_support_development">Toeta rakenduse arendust</string>
