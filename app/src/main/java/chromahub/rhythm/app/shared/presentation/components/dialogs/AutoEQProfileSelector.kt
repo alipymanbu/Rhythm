@@ -272,158 +272,158 @@ fun AutoEQProfileSelector(
                     modifier = Modifier.padding(horizontal = 5.dp, vertical = 8.dp)
                 )
                 val brandRowState = rememberLazyListState()
-                    LazyRow(
-                        state = brandRowState,
-                        contentPadding = PaddingValues(horizontal = 5.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        modifier = Modifier.horizontalEdgeBlend(lazyListState = brandRowState, fadeWidth = 12.dp)
-                    ) {
-                        item {
-                            val isSelected = selectedBrand == null
-                            val cornerRadius by animateDpAsState(
-                                targetValue = if (isSelected) 24.dp else 12.dp,
-                                animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
-                                label = "chipCornerRadius"
+                LazyRow(
+                    state = brandRowState,
+                    contentPadding = PaddingValues(horizontal = 5.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.horizontalEdgeBlend(lazyListState = brandRowState, fadeWidth = 12.dp)
+                ) {
+                    item {
+                        val isSelected = selectedBrand == null
+                        val cornerRadius by animateDpAsState(
+                            targetValue = if (isSelected) 24.dp else 12.dp,
+                            animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+                            label = "chipCornerRadius"
+                        )
+                        FilterChip(
+                            selected = isSelected,
+                            onClick = { selectedBrand = null },
+                            label = { Text(stringResource(R.string.autoeqprofileselector_all)) },
+                            leadingIcon = if (isSelected) {
+                                {
+                                    Icon(
+                                        imageVector = RhythmIcons.Check,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                    )
+                                }
+                            } else null,
+                            shape = RoundedCornerShape(cornerRadius),
+                            colors = FilterChipDefaults.filterChipColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                                labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                                selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
                             )
-                            FilterChip(
-                                selected = isSelected,
-                                onClick = { selectedBrand = null },
-                                label = { Text(stringResource(R.string.autoeqprofileselector_all)) },
-                                leadingIcon = if (isSelected) {
-                                    {
-                                        Icon(
-                                            imageVector = RhythmIcons.Check,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(FilterChipDefaults.IconSize)
-                                        )
-                                    }
-                                } else null,
-                                shape = RoundedCornerShape(cornerRadius),
-                                colors = FilterChipDefaults.filterChipColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                                    selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                                    labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
-                                )
-                            )
-                        }
-                        items(brands) { brand ->
-                            val isSelected = selectedBrand == brand
-                            val cornerRadius by animateDpAsState(
-                                targetValue = if (isSelected) 24.dp else 12.dp,
-                                animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
-                                label = "chipCornerRadius"
-                            )
-                            FilterChip(
-                                selected = isSelected,
-                                onClick = { selectedBrand = brand },
-                                label = { Text(brand) },
-                                leadingIcon = if (isSelected) {
-                                    {
-                                        Icon(
-                                            imageVector = RhythmIcons.Check,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(FilterChipDefaults.IconSize)
-                                        )
-                                    }
-                                } else null,
-                                shape = RoundedCornerShape(cornerRadius),
-                                colors = FilterChipDefaults.filterChipColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                                    selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                                    labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
-                                )
-                            )
-                        }
+                        )
                     }
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    // Type filters
-                    Text(
-                        text = stringResource(R.string.autoeqpresetpickerbottomsheet_type),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(horizontal = 5.dp, vertical = 8.dp)
-                    )
-                    val typeRowState = rememberLazyListState()
-                    LazyRow(
-                        state = typeRowState,
-                        contentPadding = PaddingValues(horizontal = 5.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        modifier = Modifier.horizontalEdgeBlend(lazyListState = typeRowState, fadeWidth = 12.dp)
-                    ) {
-                        item {
-                            val isSelected = selectedType == null
-                            val cornerRadius by animateDpAsState(
-                                targetValue = if (isSelected) 24.dp else 12.dp,
-                                animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
-                                label = "chipCornerRadius"
+                    items(brands) { brand ->
+                        val isSelected = selectedBrand == brand
+                        val cornerRadius by animateDpAsState(
+                            targetValue = if (isSelected) 24.dp else 12.dp,
+                            animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+                            label = "chipCornerRadius"
+                        )
+                        FilterChip(
+                            selected = isSelected,
+                            onClick = { selectedBrand = brand },
+                            label = { Text(brand) },
+                            leadingIcon = if (isSelected) {
+                                {
+                                    Icon(
+                                        imageVector = RhythmIcons.Check,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                    )
+                                }
+                            } else null,
+                            shape = RoundedCornerShape(cornerRadius),
+                            colors = FilterChipDefaults.filterChipColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                                labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                                selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
                             )
-                            FilterChip(
-                                selected = isSelected,
-                                onClick = { selectedType = null },
-                                label = { Text(stringResource(R.string.autoeqprofileselector_all)) },
-                                leadingIcon = if (isSelected) {
-                                    {
-                                        Icon(
-                                            imageVector = RhythmIcons.Check,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(FilterChipDefaults.IconSize)
-                                        )
-                                    }
-                                } else null,
-                                shape = RoundedCornerShape(cornerRadius),
-                                colors = FilterChipDefaults.filterChipColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                                    selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                                    labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
-                                )
-                            )
-                        }
-                        items(types) { type ->
-                            val isSelected = selectedType == type
-                            val cornerRadius by animateDpAsState(
-                                targetValue = if (isSelected) 24.dp else 12.dp,
-                                animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
-                                label = "chipCornerRadius"
-                            )
-                            FilterChip(
-                                selected = isSelected,
-                                onClick = { selectedType = type },
-                                label = { Text(type) },
-                                leadingIcon = if (isSelected) {
-                                    {
-                                        Icon(
-                                            imageVector = RhythmIcons.Check,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(FilterChipDefaults.IconSize)
-                                        )
-                                    }
-                                } else null,
-                                shape = RoundedCornerShape(cornerRadius),
-                                colors = FilterChipDefaults.filterChipColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                                    selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                                    labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
-                                )
-                            )
-                        }
+                        )
                     }
+                }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Type filters
+                Text(
+                    text = stringResource(R.string.autoeqpresetpickerbottomsheet_type),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(horizontal = 5.dp, vertical = 8.dp)
+                )
+                val typeRowState = rememberLazyListState()
+                LazyRow(
+                    state = typeRowState,
+                    contentPadding = PaddingValues(horizontal = 5.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.horizontalEdgeBlend(lazyListState = typeRowState, fadeWidth = 12.dp)
+                ) {
+                    item {
+                        val isSelected = selectedType == null
+                        val cornerRadius by animateDpAsState(
+                            targetValue = if (isSelected) 24.dp else 12.dp,
+                            animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+                            label = "chipCornerRadius"
+                        )
+                        FilterChip(
+                            selected = isSelected,
+                            onClick = { selectedType = null },
+                            label = { Text(stringResource(R.string.autoeqprofileselector_all)) },
+                            leadingIcon = if (isSelected) {
+                                {
+                                    Icon(
+                                        imageVector = RhythmIcons.Check,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                    )
+                                }
+                            } else null,
+                            shape = RoundedCornerShape(cornerRadius),
+                            colors = FilterChipDefaults.filterChipColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                                labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                                selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        )
+                    }
+                    items(types) { type ->
+                        val isSelected = selectedType == type
+                        val cornerRadius by animateDpAsState(
+                            targetValue = if (isSelected) 24.dp else 12.dp,
+                            animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+                            label = "chipCornerRadius"
+                        )
+                        FilterChip(
+                            selected = isSelected,
+                            onClick = { selectedType = type },
+                            label = { Text(type) },
+                            leadingIcon = if (isSelected) {
+                                {
+                                    Icon(
+                                        imageVector = RhythmIcons.Check,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                    )
+                                }
+                            } else null,
+                            shape = RoundedCornerShape(cornerRadius),
+                            colors = FilterChipDefaults.filterChipColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                                labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                                selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
                 }
                 
                 // Loading indicator
