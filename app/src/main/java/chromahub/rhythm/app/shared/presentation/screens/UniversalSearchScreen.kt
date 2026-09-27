@@ -35,6 +35,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -861,7 +862,14 @@ fun UniversalSearchScreen(
                                     Text(stringResource(R.string.settings_tab_albums), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp).animateItem())
                                 }
                                 item(key = "albums_grid") {
-                                    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.animateItem()) {
+                                    val searchAlbumsRowState = rememberLazyListState()
+                                    LazyRow(
+                                        state = searchAlbumsRowState,
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                        modifier = Modifier
+                                            .animateItem()
+                                            .horizontalEdgeBlend(lazyListState = searchAlbumsRowState, fadeWidth = 12.dp)
+                                    ) {
                                         items(allAlbums.size, key = { i -> "album_${allAlbums[i].title}_$i" }) { i ->
                                             SearchGridCard(item = allAlbums[i], haptics = haptics, context = context, isAlbum = true)
                                         }
@@ -888,7 +896,14 @@ fun UniversalSearchScreen(
                                     Text(stringResource(R.string.settings_tab_artists), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp).animateItem())
                                 }
                                 item(key = "artists_grid") {
-                                    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.animateItem()) {
+                                    val searchArtistsRowState = rememberLazyListState()
+                                    LazyRow(
+                                        state = searchArtistsRowState,
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                        modifier = Modifier
+                                            .animateItem()
+                                            .horizontalEdgeBlend(lazyListState = searchArtistsRowState, fadeWidth = 12.dp)
+                                    ) {
                                         items(allArtists.size, key = { i -> "artist_${allArtists[i].title}_$i" }) { i ->
                                             SearchGridCard(item = allArtists[i], haptics = haptics, context = context, isAlbum = false)
                                         }
@@ -1046,7 +1061,14 @@ fun UniversalSearchScreen(
                                     Text(stringResource(R.string.settings_tab_albums), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp).animateItem())
                                 }
                                 item(key = "albums_grid") {
-                                    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.animateItem()) {
+                                    val searchAlbumsRowState = rememberLazyListState()
+                                    LazyRow(
+                                        state = searchAlbumsRowState,
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                        modifier = Modifier
+                                            .animateItem()
+                                            .horizontalEdgeBlend(lazyListState = searchAlbumsRowState, fadeWidth = 12.dp)
+                                    ) {
                                         items(allAlbums.size, key = { i -> "album_${allAlbums[i].title}_$i" }) { i ->
                                             SearchGridCard(item = allAlbums[i], haptics = haptics, context = context, isAlbum = true)
                                         }
@@ -1073,7 +1095,14 @@ fun UniversalSearchScreen(
                                     Text(stringResource(R.string.settings_tab_artists), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 8.dp).animateItem())
                                 }
                                 item(key = "artists_grid") {
-                                    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.animateItem()) {
+                                    val searchArtistsRowState = rememberLazyListState()
+                                    LazyRow(
+                                        state = searchArtistsRowState,
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                        modifier = Modifier
+                                            .animateItem()
+                                            .horizontalEdgeBlend(lazyListState = searchArtistsRowState, fadeWidth = 12.dp)
+                                    ) {
                                         items(allArtists.size, key = { i -> "artist_${allArtists[i].title}_$i" }) { i ->
                                             SearchGridCard(item = allArtists[i], haptics = haptics, context = context, isAlbum = false)
                                         }
@@ -1887,7 +1916,7 @@ private fun SearchGridCard(
             },
         shape = expressiveShape,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
         ),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 0.dp,

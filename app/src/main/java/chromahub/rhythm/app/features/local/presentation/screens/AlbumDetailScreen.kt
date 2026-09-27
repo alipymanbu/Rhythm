@@ -80,6 +80,8 @@ import chromahub.rhythm.app.core.utils.NetworkUtils
 import chromahub.rhythm.app.shared.presentation.components.bottomsheets.ArtistChooserBottomSheet
 import chromahub.rhythm.app.shared.presentation.components.bottomsheets.PlaylistSongOptionsBottomSheet
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuContent
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuElevation
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuShape
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortOption
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmDetailActionButton
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmButtonType
@@ -958,10 +960,11 @@ fun AlbumDetailScreen(
                                         DropdownMenu(
                                             expanded = showSortMenu,
                                             onDismissRequest = { showSortMenu = false },
-                                            shape = RoundedCornerShape(20.dp),
+                                            shape = RhythmSortMenuShape,
+                                            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                                            shadowElevation = RhythmSortMenuElevation,
                                             modifier = Modifier
                                                 .widthIn(min = 250.dp)
-                                                .background(MaterialTheme.colorScheme.surfaceContainer)
                                                 .padding(8.dp)
                                         ) {
                                             RhythmSortMenuContent(
@@ -1389,10 +1392,11 @@ private fun AlbumListControls(
             DropdownMenu(
                 expanded = showSortMenu,
                 onDismissRequest = onDismissSortMenu,
-                shape = RoundedCornerShape(20.dp),
+                shape = RhythmSortMenuShape,
+                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                shadowElevation = RhythmSortMenuElevation,
                 modifier = Modifier
                     .widthIn(min = 250.dp)
-                    .background(MaterialTheme.colorScheme.surfaceContainer)
                     .padding(8.dp)
             ) {
                 RhythmSortMenuContent(

@@ -56,6 +56,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.border
 import androidx.compose.foundation.rememberScrollState
+import chromahub.rhythm.app.shared.presentation.components.common.horizontalEdgeBlend
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.material3.*
@@ -501,7 +502,7 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 24.dp, bottomEnd = 24.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Row(
@@ -580,7 +581,7 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                     Material3SettingsGroup(
                         title = context.getString(R.string.settings_rhythm_guard_device_controls_title),
                         items = materialItems,
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer
                     )
                 }
 
@@ -593,7 +594,7 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(24.dp),
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
                         ) {
                             Column(
                                 modifier = Modifier.padding(16.dp),
@@ -621,8 +622,11 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                                         ),
                                         style = MaterialTheme.typography.labelLarge
                                     )
+                                    val alertThresholdScrollState = rememberScrollState()
                                     Row(
-                                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                                        modifier = Modifier
+                                            .horizontalScroll(alertThresholdScrollState)
+                                            .horizontalEdgeBlend(scrollState = alertThresholdScrollState, fadeWidth = 12.dp),
                                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                                     ) {
                                         listOf(-1, 60, 90, 120).forEach { option ->
@@ -692,8 +696,11 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                                         ),
                                         style = MaterialTheme.typography.labelLarge
                                     )
+                                    val warningTimeoutScrollState = rememberScrollState()
                                     Row(
-                                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                                        modifier = Modifier
+                                            .horizontalScroll(warningTimeoutScrollState)
+                                            .horizontalEdgeBlend(scrollState = warningTimeoutScrollState, fadeWidth = 12.dp),
                                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                                     ) {
                                         listOf(2, 5, 10, 15).forEach { option ->
@@ -759,8 +766,11 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                                         ),
                                         style = MaterialTheme.typography.labelLarge
                                     )
+                                    val postTimeoutScrollState = rememberScrollState()
                                     Row(
-                                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                                        modifier = Modifier
+                                            .horizontalScroll(postTimeoutScrollState)
+                                            .horizontalEdgeBlend(scrollState = postTimeoutScrollState, fadeWidth = 12.dp),
                                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                                     ) {
                                         listOf(3, 5, 10, 15).forEach { option ->
@@ -826,8 +836,11 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                                         ),
                                         style = MaterialTheme.typography.labelLarge
                                     )
+                                    val breakResumeScrollState = rememberScrollState()
                                     Row(
-                                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                                        modifier = Modifier
+                                            .horizontalScroll(breakResumeScrollState)
+                                            .horizontalEdgeBlend(scrollState = breakResumeScrollState, fadeWidth = 12.dp),
                                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                                     ) {
                                         listOf(10, 15, 30, 60).forEach { option ->
@@ -895,8 +908,11 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
+                                    val protectionPresetScrollState = rememberScrollState()
                                     Row(
-                                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                                        modifier = Modifier
+                                            .horizontalScroll(protectionPresetScrollState)
+                                            .horizontalEdgeBlend(scrollState = protectionPresetScrollState, fadeWidth = 12.dp),
                                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                                     ) {
                                         listOf(
@@ -1013,7 +1029,7 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                         Material3SettingsGroup(
                             title = context.getString(R.string.settings_rhythm_guard_auto_policy_table_title),
                             items = policyItems,
-                            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                            containerColor = MaterialTheme.colorScheme.surfaceContainer
                         )
                     }
                 }
@@ -1049,7 +1065,7 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 8.dp, bottomEnd = 8.dp),
-                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
                             ) {
                                 Column(modifier = Modifier.padding(16.dp)) {
                                     Text(
@@ -1099,7 +1115,7 @@ fun RhythmGuardSettingsScreen(onBackClick: () -> Unit) {
                             Material3SettingsGroup(
                                 title = context.getString(R.string.settings_rhythm_guard_manual_controls_title),
                                 items = materialItems,
-                                containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                                containerColor = MaterialTheme.colorScheme.surfaceContainer,
                                 itemShape = RoundedCornerShape(8.dp),
                                 lastItemShape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 24.dp, bottomEnd = 24.dp)
                             )
@@ -1843,7 +1859,7 @@ fun RhythmGuardHeroCard(
             containerColor = if (isEnabled)
                 MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
             else
-                MaterialTheme.colorScheme.surfaceContainerLow
+                MaterialTheme.colorScheme.surfaceContainer
         ),
         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 8.dp, bottomEnd = 8.dp)
     ) {
@@ -1969,7 +1985,7 @@ private fun RhythmGuardTrendCard(
     Card(
         modifier = modifier,
         shape = shape,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(

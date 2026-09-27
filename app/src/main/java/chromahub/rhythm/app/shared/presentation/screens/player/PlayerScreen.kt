@@ -802,9 +802,6 @@ fun PlayerScreen(
                     musicViewModel.setPlaybackPitch(pitch)
                     showPlaybackSpeedDialog = false
                     showPlaybackPitchDialog = false
-                },
-                onSetDefaultSpeed = { speed ->
-                    musicViewModel.setDefaultPlaybackSpeed(speed)
                 }
             )
         }

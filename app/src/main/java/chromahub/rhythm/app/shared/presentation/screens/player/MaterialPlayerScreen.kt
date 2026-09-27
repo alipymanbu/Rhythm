@@ -63,6 +63,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import chromahub.rhythm.app.shared.presentation.components.common.horizontalEdgeBlend
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.ui.draw.blur
@@ -2898,8 +2899,15 @@ fun MaterialPlayerScreen(
                                 val chipIconSize = if (isExtraSmallWidth) 14.dp else 16.dp
                                 val chipFontSize = if (isExtraSmallWidth) 11.sp else 12.sp
 
+                                val playerChipsListState = rememberLazyListState()
                                 LazyRow(
-                                    modifier = Modifier.fillMaxWidth(),
+                                    state = playerChipsListState,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .horizontalEdgeBlend(
+                                            lazyListState = playerChipsListState,
+                                            fadeWidth = if (isExtraSmallWidth) 8.dp else 16.dp
+                                        ),
                                     horizontalArrangement = Arrangement.spacedBy(
                                         if (isExtraSmallWidth) 4.dp else 8.dp
                                     ),
@@ -3807,9 +3815,6 @@ fun MaterialPlayerScreen(
                 musicViewModel.setPlaybackPitch(pitch)
                 showPlaybackSpeedDialog = false
                 showPlaybackPitchDialog = false
-            },
-            onSetDefaultSpeed = { speed ->
-                musicViewModel.setDefaultPlaybackSpeed(speed)
             }
         )
     }

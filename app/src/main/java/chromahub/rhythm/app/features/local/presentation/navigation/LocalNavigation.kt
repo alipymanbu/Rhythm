@@ -1519,7 +1519,15 @@ private fun LocalNavigationContent(
                                                 label = "pillWidth_$title"
                                             )
 
-                                            // Icon color animation
+                                            val itemWeight by animateFloatAsState(
+                                                targetValue = if (isSelected) 1.8f else 1f,
+                                                animationSpec = spring(
+                                                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                                                    stiffness = Spring.StiffnessLow
+                                                ),
+                                                label = "weight_$title"
+                                            )
+
                                             val iconColor by animateColorAsState(
                                                 targetValue = if (isSelected)
                                                     MaterialTheme.colorScheme.onPrimaryContainer
@@ -1533,7 +1541,7 @@ private fun LocalNavigationContent(
 
                                             Box(
                                                 modifier = Modifier
-                                                    .weight(1f)
+                                                    .weight(itemWeight)
                                                     .fillMaxHeight()
                                                     .clickable {
                                                         HapticUtils.performHapticFeedback(

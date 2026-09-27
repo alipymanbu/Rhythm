@@ -112,6 +112,8 @@ import androidx.compose.material3.DropdownMenuItem
 import chromahub.rhythm.app.shared.presentation.components.Material3SettingsGroup
 import chromahub.rhythm.app.shared.presentation.components.Material3SettingsItem
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuContent
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuElevation
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuShape
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSongMenuContent
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortOption
 import chromahub.rhythm.app.shared.presentation.components.common.ExpressiveScrollBar
@@ -1276,10 +1278,11 @@ fun LibraryScreen(
                         DropdownMenu(
                             expanded = showSortMenu,
                             onDismissRequest = { showSortMenu = false },
-                            shape = RoundedCornerShape(20.dp),
+                            shape = RhythmSortMenuShape,
+                            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                            shadowElevation = RhythmSortMenuElevation,
                             modifier = Modifier
                                 .widthIn(min = 250.dp)
-                                .background(MaterialTheme.colorScheme.surfaceContainer)
                                 .padding(8.dp)
                         ) {
                             val activeSortOrder = pendingSortOrder ?: sortOrder
@@ -1413,10 +1416,11 @@ fun LibraryScreen(
                              DropdownMenu(
                                  expanded = showPlaylistSortMenu,
                                  onDismissRequest = { showPlaylistSortMenu = false },
-                                 shape = RoundedCornerShape(20.dp),
+                                 shape = RhythmSortMenuShape,
+                                 containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                                 shadowElevation = RhythmSortMenuElevation,
                                  modifier = Modifier
                                      .widthIn(min = 250.dp)
-                                     .background(MaterialTheme.colorScheme.surfaceContainer)
                                      .padding(8.dp)
                              ) {
                                  val currentKey = when (playlistSortOrder) {
@@ -4435,7 +4439,7 @@ fun EmptyState(
                 },
             shape = RoundedCornerShape(28.dp),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                containerColor = MaterialTheme.colorScheme.surfaceContainer
             )
         ) {
             Column(

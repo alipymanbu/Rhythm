@@ -33,6 +33,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
+import chromahub.rhythm.app.shared.presentation.components.common.horizontalEdgeBlend
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -80,6 +82,8 @@ import chromahub.rhythm.app.shared.presentation.components.common.ExpressiveShap
 import chromahub.rhythm.app.shared.presentation.components.common.rememberExpressiveShapeFor
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSongMenuContent
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuContent
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuElevation
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuShape
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortOption
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmDetailActionButton
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmButtonType
@@ -931,10 +935,11 @@ fun ArtistDetailScreen(
                                         DropdownMenu(
                                             expanded = showSortMenu,
                                             onDismissRequest = { showSortMenu = false },
-                                            shape = RoundedCornerShape(20.dp),
+                                            shape = RhythmSortMenuShape,
+                                            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                                            shadowElevation = RhythmSortMenuElevation,
                                             modifier = Modifier
                                                 .widthIn(min = 250.dp)
-                                                .background(MaterialTheme.colorScheme.surfaceContainer)
                                                 .padding(8.dp)
                                         ) {
                                             RhythmSortMenuContent(
@@ -1345,7 +1350,13 @@ private fun ArtistAlbumsSection(
         
         Spacer(modifier = Modifier.height(8.dp))
         
+        val artistAlbumsListState = rememberLazyListState()
         LazyRow(
+            state = artistAlbumsListState,
+            modifier = Modifier.horizontalEdgeBlend(
+                lazyListState = artistAlbumsListState,
+                fadeWidth = 20.dp
+            ),
             contentPadding = PaddingValues(horizontal = 24.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -1392,7 +1403,7 @@ private fun ArtistAlbumCard(
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
         )
     ) {
         Column {

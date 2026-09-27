@@ -589,8 +589,12 @@ private fun TopArtistsList(
             color = MaterialTheme.colorScheme.onSurface
         )
 
+        val topArtistsListState = rememberLazyListState()
         LazyRow(
-            modifier = Modifier.fillMaxWidth(),
+            state = topArtistsListState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalEdgeBlend(lazyListState = topArtistsListState, fadeWidth = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(horizontal = 0.dp)
         ) {
@@ -657,8 +661,12 @@ private fun CategoryMetricsSection(
     var selectedDimension by remember { mutableStateOf(CategoryDimension.SONG) }
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        val categoryTabsListState = rememberLazyListState()
         LazyRow(
-            modifier = Modifier.fillMaxWidth(),
+            state = categoryTabsListState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalEdgeBlend(lazyListState = categoryTabsListState, fadeWidth = 16.dp),
             horizontalArrangement = Arrangement.Center,
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {

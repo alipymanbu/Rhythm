@@ -219,6 +219,7 @@ import chromahub.rhythm.app.shared.presentation.components.common.RhythmButtonSi
 import chromahub.rhythm.app.shared.presentation.components.common.ActionProgressLoader
 import chromahub.rhythm.app.shared.presentation.components.common.NetworkOperationLoader
 import chromahub.rhythm.app.shared.presentation.components.common.ExpressiveAnimatedCounter
+import chromahub.rhythm.app.shared.presentation.components.common.horizontalEdgeBlend
 
 import chromahub.rhythm.app.shared.presentation.components.bottomsheets.AddToPlaylistBottomSheet
 import chromahub.rhythm.app.shared.presentation.components.bottomsheets.SongInfoBottomSheet
@@ -1042,7 +1043,13 @@ private fun StreamingHomeBody(
                                 }
                             )
                             Spacer(modifier = Modifier.height(20.dp))
+                            val streamingAlbumsListState = rememberLazyListState()
                             LazyRow(
+                                state = streamingAlbumsListState,
+                                modifier = Modifier.horizontalEdgeBlend(
+                                    lazyListState = streamingAlbumsListState,
+                                    fadeWidth = 16.dp
+                                ),
                                 contentPadding = PaddingValues(horizontal = 4.dp),
                                 horizontalArrangement = Arrangement.spacedBy(16.dp)
                             ) {
@@ -1077,7 +1084,13 @@ private fun StreamingHomeBody(
                                 viewAllAction = onViewAllArtists
                             )
                             Spacer(modifier = Modifier.height(16.dp))
+                            val streamingArtistsListState = rememberLazyListState()
                             LazyRow(
+                                state = streamingArtistsListState,
+                                modifier = Modifier.horizontalEdgeBlend(
+                                    lazyListState = streamingArtistsListState,
+                                    fadeWidth = 16.dp
+                                ),
                                 contentPadding = PaddingValues(horizontal = 4.dp),
                                 horizontalArrangement = Arrangement.spacedBy(16.dp)
                             ) {
@@ -1650,6 +1663,10 @@ private fun ModernScrollableContent(
                                 val newReleasesListState = rememberLazyListState()
                                 LazyRow(
                                     state = newReleasesListState,
+                                    modifier = Modifier.horizontalEdgeBlend(
+                                        lazyListState = newReleasesListState,
+                                        fadeWidth = 16.dp
+                                    ),
                                     contentPadding = PaddingValues(horizontal = 4.dp),
                                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                                 ) {
@@ -1699,6 +1716,10 @@ private fun ModernScrollableContent(
                                 val recentlyAddedListState = rememberLazyListState()
                                 LazyRow(
                                     state = recentlyAddedListState,
+                                    modifier = Modifier.horizontalEdgeBlend(
+                                        lazyListState = recentlyAddedListState,
+                                        fadeWidth = 16.dp
+                                    ),
                                     contentPadding = PaddingValues(horizontal = 4.dp),
                                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                                 ) {
@@ -1995,6 +2016,10 @@ private fun ModernRecentlyPlayedSection(
                 val recentlyPlayedListState = rememberLazyListState()
                 LazyRow(
                     state = recentlyPlayedListState,
+                    modifier = Modifier.horizontalEdgeBlend(
+                        lazyListState = recentlyPlayedListState,
+                        fadeWidth = 16.dp
+                    ),
                     contentPadding = PaddingValues(horizontal = 8.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
@@ -2630,6 +2655,10 @@ private fun ModernArtistsSection(
         val artistsListState = rememberLazyListState()
         LazyRow(
             state = artistsListState,
+            modifier = Modifier.horizontalEdgeBlend(
+                lazyListState = artistsListState,
+                fadeWidth = 16.dp
+            ),
             contentPadding = PaddingValues(horizontal = 4.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -3349,7 +3378,7 @@ private fun ModernEmptyState(
             .fillMaxWidth()
             .padding(horizontal = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
         ),
         shape = ExpressiveShapes.SquircleLarge
     ) {

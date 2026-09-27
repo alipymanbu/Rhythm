@@ -1437,10 +1437,10 @@ fun EnhancedPermissionContent(
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
 
-                // Permission tips card
                 Card(
+                    shape = RoundedCornerShape(18.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     ),
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -1453,7 +1453,7 @@ fun EnhancedPermissionContent(
                         ) {
                             Icon(
                                 imageVector = RhythmIcons.Info,
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp)
                             )
@@ -1473,10 +1473,6 @@ fun EnhancedPermissionContent(
                         PermissionTipItem(
                             icon = RhythmIcons.SettingsFilled,
                             text = context.getString(R.string.onboarding_permission_tip_2)
-                        )
-                        PermissionTipItem(
-                            icon = RhythmIcons.Security,
-                            text = context.getString(R.string.onboarding_permission_tip_3)
                         )
                     }
                 }
@@ -1860,7 +1856,7 @@ private fun PermissionTipItem(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f),
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(18.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -2125,12 +2121,11 @@ fun EnhancedBackupRestoreContent(
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
 
-                // Backup features info card
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(24.dp),
+                    shape = RoundedCornerShape(18.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     )
                 ) {
                     Column(
@@ -2141,7 +2136,7 @@ fun EnhancedBackupRestoreContent(
                         ) {
                             Icon(
                                 imageVector = RhythmIcons.Info,
-                                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp)
                             )
@@ -2150,7 +2145,7 @@ fun EnhancedBackupRestoreContent(
                                 text = context.getString(R.string.onboarding_what_backed_up),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
                         }
                         Spacer(modifier = Modifier.height(12.dp))
@@ -2162,10 +2157,6 @@ fun EnhancedBackupRestoreContent(
                         BackupFeatureTipItem(
                             icon = MaterialSymbolIcon("restore_from_trash", filled = true),
                             text = context.getString(R.string.onboarding_backed_up_2)
-                        )
-                        BackupFeatureTipItem(
-                            icon = RhythmIcons.Security,
-                            text = context.getString(R.string.onboarding_backed_up_3)
                         )
                     }
                 }
@@ -2272,12 +2263,11 @@ fun EnhancedBackupRestoreContent(
                     hapticFeedback = hapticFeedback
                 )
 
-                // Backup features info card
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(24.dp),
+                    shape = RoundedCornerShape(18.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     )
                 ) {
                     Column(
@@ -2288,7 +2278,7 @@ fun EnhancedBackupRestoreContent(
                         ) {
                             Icon(
                                 imageVector = RhythmIcons.Info,
-                                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp)
                             )
@@ -2297,7 +2287,7 @@ fun EnhancedBackupRestoreContent(
                                 text = context.getString(R.string.onboarding_what_backed_up),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
                         }
                         Spacer(modifier = Modifier.height(12.dp))
@@ -2309,10 +2299,6 @@ fun EnhancedBackupRestoreContent(
                         BackupFeatureTipItem(
                             icon = MaterialSymbolIcon("restore_from_trash", filled = true),
                             text = context.getString(R.string.onboarding_backed_up_2)
-                        )
-                        BackupFeatureTipItem(
-                            icon = RhythmIcons.Security,
-                            text = context.getString(R.string.onboarding_backed_up_3)
                         )
                     }
                 }
@@ -2578,7 +2564,7 @@ private fun BackupFeatureTipItem(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(18.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -2603,7 +2589,7 @@ private fun LibraryTipItem(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = color.copy(alpha = 0.8f),
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(18.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -2681,10 +2667,9 @@ fun EnhancedAudioPlaybackContent(
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
 
-                // Equalizer and Sleep Timer info card
                 Card(
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     ),
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -2697,7 +2682,7 @@ fun EnhancedAudioPlaybackContent(
                         ) {
                             Icon(
                                 imageVector = RhythmIcons.Info,
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp)
                             )
@@ -2783,12 +2768,11 @@ fun EnhancedAudioPlaybackContent(
                             }
                         )
 
-                        // Lyrics sources info
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(18.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer
+                                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                             )
                         ) {
                             Row(
@@ -2797,10 +2781,10 @@ fun EnhancedAudioPlaybackContent(
                             ) {
                                 Icon(
                                     imageVector = MaterialSymbolIcon("lightbulb", filled = true),
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                     contentDescription = null,
                                     
-                                    modifier = Modifier.size(18.dp)
+                                    modifier = Modifier.size(24.dp)
                                 )
                                 Spacer(modifier = Modifier.width(12.dp))
                                 Text(
@@ -2901,12 +2885,11 @@ fun EnhancedAudioPlaybackContent(
                             }
                         )
 
-                        // Lyrics sources info
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(18.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer
+                                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                             )
                         ) {
                             Row(
@@ -2915,10 +2898,10 @@ fun EnhancedAudioPlaybackContent(
                             ) {
                                 Icon(
                                     imageVector = MaterialSymbolIcon("lightbulb", filled = true),
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                     contentDescription = null,
                                     
-                                    modifier = Modifier.size(18.dp)
+                                    modifier = Modifier.size(24.dp)
                                 )
                                 Spacer(modifier = Modifier.width(12.dp))
                                 Text(
@@ -2935,10 +2918,9 @@ fun EnhancedAudioPlaybackContent(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Equalizer and Sleep Timer info card
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -2951,7 +2933,7 @@ fun EnhancedAudioPlaybackContent(
                     ) {
                         Icon(
                             imageVector = RhythmIcons.Info,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            tint = MaterialTheme.colorScheme.primary,
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
@@ -3041,12 +3023,11 @@ fun EnhancedLibrarySetupContent(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                // Educational cards for library features
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(24.dp),
+                    shape = RoundedCornerShape(18.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     )
                 ) {
                     Column(
@@ -3058,7 +3039,7 @@ fun EnhancedLibrarySetupContent(
                             Icon(
                                 imageVector = MaterialSymbolIcon("lightbulb"),
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(24.dp)
                             )
                             Spacer(modifier = Modifier.width(12.dp))
@@ -3078,14 +3059,6 @@ fun EnhancedLibrarySetupContent(
                         LibraryTipItem(
                             icon = RhythmIcons.Queue,
                             text = context.getString(R.string.onboarding_library_2)
-                        )
-                        LibraryTipItem(
-                            icon = RhythmIcons.Library,
-                            text = context.getString(R.string.onboarding_library_4)
-                        )
-                        LibraryTipItem(
-                            icon = RhythmIcons.Tune,
-                            text = context.getString(R.string.onboarding_library_3)
                         )
                     }
                 }
@@ -3175,12 +3148,11 @@ fun EnhancedLibrarySetupContent(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Educational cards for library features
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                 )
             ) {
                 Column(
@@ -3192,7 +3164,7 @@ fun EnhancedLibrarySetupContent(
                         Icon(
                             imageVector = MaterialSymbolIcon("lightbulb"),
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(12.dp))
@@ -3212,14 +3184,6 @@ fun EnhancedLibrarySetupContent(
                     LibraryTipItem(
                         icon = RhythmIcons.Queue,
                         text = context.getString(R.string.onboarding_library_2)
-                    )
-                    LibraryTipItem(
-                        icon = RhythmIcons.Library,
-                        text = context.getString(R.string.onboarding_library_4)
-                    )
-                    LibraryTipItem(
-                        icon = RhythmIcons.Tune,
-                        text = context.getString(R.string.onboarding_library_3)
                     )
                 }
             }
@@ -3879,12 +3843,11 @@ fun EnhancedThemingContent(
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
 
-                // Guide to Tuner settings
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(18.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     )
                 ) {
                     Column(
@@ -3895,7 +3858,7 @@ fun EnhancedThemingContent(
                         ) {
                             Icon(
                                 imageVector = RhythmIcons.SettingsFilled,
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp)
                             )
@@ -3916,10 +3879,6 @@ fun EnhancedThemingContent(
                         LibraryTipItem(
                             icon = MaterialSymbolIcon("font_download", filled = true),
                             text = context.getString(R.string.onboarding_tuner_2)
-                        )
-                        LibraryTipItem(
-                            icon = RhythmIcons.AutoAwesome,
-                            text = context.getString(R.string.onboarding_tuner_3)
                         )
                     }
                 }
@@ -4063,12 +4022,11 @@ fun EnhancedThemingContent(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Guide to Tuner settings
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                 )
             ) {
                 Column(
@@ -4079,7 +4037,7 @@ fun EnhancedThemingContent(
                     ) {
                         Icon(
                             imageVector = RhythmIcons.SettingsFilled,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            tint = MaterialTheme.colorScheme.primary,
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
@@ -4100,10 +4058,6 @@ fun EnhancedThemingContent(
                     LibraryTipItem(
                         icon = MaterialSymbolIcon("font_download", filled = true),
                         text = context.getString(R.string.onboarding_tuner_2)
-                    )
-                    LibraryTipItem(
-                        icon = RhythmIcons.AutoAwesome,
-                        text = context.getString(R.string.onboarding_tuner_3)
                     )
                 }
             }
@@ -4513,17 +4467,13 @@ fun EnhancedRhythmGuardContent(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(18.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     )
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         OnboardingTipItem(
                             icon = RhythmIcons.CheckCircle,
                             text = context.getString(R.string.onboarding_rhythm_guard_tip_1)
-                        )
-                        OnboardingTipItem(
-                            icon = RhythmIcons.AccessTime,
-                            text = context.getString(R.string.onboarding_rhythm_guard_tip_2)
                         )
                         OnboardingTipItem(
                             icon = RhythmIcons.Tune,
@@ -4590,17 +4540,13 @@ fun EnhancedRhythmGuardContent(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                 )
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     OnboardingTipItem(
                         icon = RhythmIcons.CheckCircle,
                         text = context.getString(R.string.onboarding_rhythm_guard_tip_1)
-                    )
-                    OnboardingTipItem(
-                        icon = RhythmIcons.AccessTime,
-                        text = context.getString(R.string.onboarding_rhythm_guard_tip_2)
                     )
                     OnboardingTipItem(
                         icon = RhythmIcons.Tune,
@@ -4703,17 +4649,13 @@ fun EnhancedFullTourPromptContent(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(18.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     )
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         OnboardingTipItem(
                             icon = RhythmIcons.Tune,
                             text = context.getString(R.string.onboarding_full_tour_prompt_tip_1)
-                        )
-                        OnboardingTipItem(
-                            icon = RhythmIcons.Library,
-                            text = context.getString(R.string.onboarding_full_tour_prompt_tip_2)
                         )
                         OnboardingTipItem(
                             icon = RhythmIcons.Info,
@@ -4807,17 +4749,13 @@ fun EnhancedFullTourPromptContent(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                 )
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     OnboardingTipItem(
                         icon = RhythmIcons.Tune,
                         text = context.getString(R.string.onboarding_full_tour_prompt_tip_1)
-                    )
-                    OnboardingTipItem(
-                        icon = RhythmIcons.Library,
-                        text = context.getString(R.string.onboarding_full_tour_prompt_tip_2)
                     )
                     OnboardingTipItem(
                         icon = RhythmIcons.Info,
@@ -6018,10 +5956,9 @@ fun EnhancedMediaScanContent(
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
 
-                // Media scan tips card
                 Card(
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     ),
                     shape = RoundedCornerShape(18.dp),
                     modifier = Modifier.fillMaxWidth()
@@ -6035,7 +5972,7 @@ fun EnhancedMediaScanContent(
                         ) {
                             Icon(
                                 imageVector = RhythmIcons.Info,
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp)
                             )
@@ -6055,10 +5992,6 @@ fun EnhancedMediaScanContent(
                         MediaScanTipItem(
                             icon = RhythmIcons.CheckCircle,
                             text = context.getString(R.string.onboarding_media_scan_whitelist)
-                        )
-                        MediaScanTipItem(
-                            icon = RhythmIcons.SettingsFilled,
-                            text = context.getString(R.string.onboarding_media_scan_configure_in_tuner)
                         )
                     }
                 }
@@ -6172,10 +6105,9 @@ fun EnhancedMediaScanContent(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Media scan tips card
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                 ),
                 shape = RoundedCornerShape(18.dp),
                 modifier = Modifier.fillMaxWidth()
@@ -6189,7 +6121,7 @@ fun EnhancedMediaScanContent(
                     ) {
                         Icon(
                             imageVector = RhythmIcons.Info,
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            tint = MaterialTheme.colorScheme.primary,
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
@@ -6209,10 +6141,6 @@ fun EnhancedMediaScanContent(
                     MediaScanTipItem(
                         icon = RhythmIcons.CheckCircle,
                         text = context.getString(R.string.onboarding_media_scan_whitelist)
-                    )
-                    MediaScanTipItem(
-                        icon = RhythmIcons.SettingsFilled,
-                        text = context.getString(R.string.onboarding_media_scan_configure_in_tuner)
                     )
                 }
             }
@@ -6281,7 +6209,7 @@ private fun MediaScanTipItem(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f),
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(18.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -6490,12 +6418,11 @@ fun EnhancedSetupFinishedContent(
                     modifier = Modifier.padding(bottom = 32.dp)
                 )
 
-                // Next steps card
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(18.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                     )
                 ) {
                     Column(
@@ -6506,7 +6433,7 @@ fun EnhancedSetupFinishedContent(
                         ) {
                             Icon(
                                 imageVector = MaterialSymbolIcon("lightbulb", filled = true),
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                                 contentDescription = null,
                                 
                                 modifier = Modifier.size(24.dp)
@@ -6532,10 +6459,6 @@ fun EnhancedSetupFinishedContent(
                         NextStepItem(
                             icon = MaterialSymbolIcon("graphic_eq", filled = true),
                             text = context.getString(R.string.onboarding_next_finetune)
-                        )
-                        NextStepItem(
-                            icon = RhythmIcons.SettingsFilled,
-                            text = context.getString(R.string.onboarding_next_explore)
                         )
                     }
                 }
@@ -6711,12 +6634,11 @@ fun EnhancedSetupFinishedContent(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Next steps card
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
                 )
             ) {
                 Column(
@@ -6727,7 +6649,7 @@ fun EnhancedSetupFinishedContent(
                     ) {
                         Icon(
                             imageVector = MaterialSymbolIcon("lightbulb", filled = true),
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                             contentDescription = null,
                             
                             modifier = Modifier.size(24.dp)
@@ -6753,10 +6675,6 @@ fun EnhancedSetupFinishedContent(
                     NextStepItem(
                         icon = MaterialSymbolIcon("graphic_eq", filled = true),
                         text = context.getString(R.string.onboarding_next_finetune)
-                    )
-                    NextStepItem(
-                        icon = RhythmIcons.SettingsFilled,
-                        text = context.getString(R.string.onboarding_next_explore)
                     )
                 }
             }
@@ -6786,7 +6704,7 @@ private fun NextStepItem(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(18.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -7514,14 +7432,14 @@ private fun GestureTipsCard() {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
         )
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = MaterialSymbolIcon("lightbulb", filled = true),
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                tint = MaterialTheme.colorScheme.primary,
                     contentDescription = null,
                     
                     modifier = Modifier.size(24.dp)
@@ -7539,10 +7457,6 @@ private fun GestureTipsCard() {
             OnboardingTipItem(
                 icon = MaterialSymbolIcon("swipe_vertical"),
                 text = context.getString(R.string.onboarding_gesture_tip_1)
-            )
-            OnboardingTipItem(
-                icon = MaterialSymbolIcon("speed"),
-                text = context.getString(R.string.onboarding_gesture_tip_2)
             )
         }
     }
@@ -7854,14 +7768,14 @@ private fun WidgetTipsCard() {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
         )
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = RhythmIcons.Info,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = MaterialTheme.colorScheme.primary,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp)
                 )
@@ -7880,16 +7794,8 @@ private fun WidgetTipsCard() {
                 text = context.getString(R.string.widget_tip_cookie_corners)
             )
             OnboardingTipItem(
-                icon = MaterialSymbolIcon("auto_graph"),
-                text = context.getString(R.string.widget_tip_stats_widget)
-            )
-            OnboardingTipItem(
                 icon = MaterialSymbolIcon("touch_app"),
                 text = context.getString(R.string.widget_tip_controls)
-            )
-            OnboardingTipItem(
-                icon = MaterialSymbolIcon("aspect_ratio"),
-                text = context.getString(R.string.widget_tip_resize_settings)
             )
         }
     }
@@ -9173,14 +9079,14 @@ private fun IntegrationsInfoCard() {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
         )
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = RhythmIcons.Info,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = MaterialTheme.colorScheme.primary,
                     contentDescription = null,
                     
                     modifier = Modifier.size(24.dp)
@@ -9370,15 +9276,14 @@ private fun StatsFeaturesAndInfoCard() {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
         )
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
-            // Features section
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = MaterialSymbolIcon("stars", filled = true),
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = MaterialTheme.colorScheme.primary,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp)
                 )
@@ -9399,14 +9304,6 @@ private fun StatsFeaturesAndInfoCard() {
             OnboardingTipItem(
                 icon = RhythmIcons.MusicNote,
                 text = context.getString(R.string.onboarding_stats_feature_2)
-            )
-            OnboardingTipItem(
-                icon = RhythmIcons.Artist,
-                text = context.getString(R.string.onboarding_stats_feature_3)
-            )
-            OnboardingTipItem(
-                icon = RhythmIcons.Album,
-                text = context.getString(R.string.onboarding_stats_feature_4)
             )
             
             Spacer(modifier = Modifier.height(12.dp))
@@ -9445,7 +9342,7 @@ fun OnboardingTipItem(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(18.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -9744,14 +9641,14 @@ private fun AppModeChoiceTipsCard() {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
         )
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = RhythmIcons.Info,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = MaterialTheme.colorScheme.primary,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp)
                 )
@@ -9765,10 +9662,6 @@ private fun AppModeChoiceTipsCard() {
             }
             Spacer(modifier = Modifier.height(12.dp))
 
-            OnboardingTipItem(
-                icon = MaterialSymbolIcon("settings"),
-                text = stringResource(R.string.onboardingscreen_switch_easily_anytime_in)
-            )
             OnboardingTipItem(
                 icon = MaterialSymbolIcon("folder_open"),
                 text = stringResource(R.string.onboardingscreen_local_mode_scans_and)
@@ -10012,14 +9905,14 @@ private fun StreamingServiceChoiceTipsCard() {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
         )
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = RhythmIcons.Info,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = MaterialTheme.colorScheme.primary,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp)
                 )
@@ -10040,10 +9933,6 @@ private fun StreamingServiceChoiceTipsCard() {
             OnboardingTipItem(
                 icon = MaterialSymbolIcon("video_settings"),
                 text = stringResource(R.string.onboardingscreen_service_jellyfin_tip)
-            )
-            OnboardingTipItem(
-                icon = MaterialSymbolIcon("offline_pin"),
-                text = stringResource(R.string.onboardingscreen_service_caching_tip)
             )
         }
     }
@@ -10374,14 +10263,14 @@ private fun StreamingSetupTipsCard() {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.84f)
         )
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = RhythmIcons.Info,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    tint = MaterialTheme.colorScheme.primary,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp)
                 )
@@ -10398,10 +10287,6 @@ private fun StreamingSetupTipsCard() {
             OnboardingTipItem(
                 icon = MaterialSymbolIcon("wifi_find"),
                 text = stringResource(R.string.onboardingscreen_setup_auto_scan_tip)
-            )
-            OnboardingTipItem(
-                icon = MaterialSymbolIcon("lock"),
-                text = stringResource(R.string.onboardingscreen_setup_remote_tip)
             )
             OnboardingTipItem(
                 icon = MaterialSymbolIcon("verified_user"),

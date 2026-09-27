@@ -8,10 +8,13 @@
 package chromahub.rhythm.app.shared.presentation.components.bottomsheets
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import chromahub.rhythm.app.shared.presentation.components.common.horizontalEdgeBlend
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -49,8 +52,7 @@ fun PlaybackSpeedAndPitchBottomSheet(
     syncEnabled: Boolean = false,
     onSyncChange: (Boolean) -> Unit = {},
     onDismiss: () -> Unit,
-    onSave: (speed: Float, pitch: Float) -> Unit,
-    onSetDefaultSpeed: ((Float) -> Unit)? = null
+    onSave: (speed: Float, pitch: Float) -> Unit
 ) {
     val context = LocalContext.current
     val haptics = LocalHapticFeedback.current
@@ -170,34 +172,6 @@ fun PlaybackSpeedAndPitchBottomSheet(
                                 }
                             )
                         )
-
-                        if (onSetDefaultSpeed != null) {
-                            add(
-                                Material3SettingsItem(
-                                    icon = MaterialSymbolIcon("star", filled = true),
-                                    palette = SettingsPalettes.Amber,
-                                    title = {
-                                        Text(
-                                            text = stringResource(R.string.set_as_default_speed),
-                                            style = MaterialTheme.typography.bodyLarge,
-                                            fontWeight = FontWeight.SemiBold,
-                                            color = MaterialTheme.colorScheme.onSurface
-                                        )
-                                    },
-                                    description = {
-                                        Text(
-                                            text = stringResource(R.string.current_speed_value, formatValueWithX(selectedSpeed)),
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
-                                    },
-                                    onClick = {
-                                        HapticUtils.performHapticFeedback(context, haptics, HapticType.HEAVY)
-                                        onSetDefaultSpeed.invoke(selectedSpeed)
-                                    }
-                                )
-                            )
-                        }
                     }
 
                     Material3SettingsGroup(
@@ -246,31 +220,22 @@ fun PlaybackSpeedAndPitchBottomSheet(
                                         modifier = Modifier.size(18.dp)
                                     )
                                 }
-                                val speedSliderState = remember(minVal, maxVal) {
-                                    SliderState(
-                                        value = selectedSpeed,
-                                        trackRange = minVal..maxVal
-                                    )
-                                }
-                                speedSliderState.value = selectedSpeed
-                                Slider(
-                                    state = speedSliderState,
+                                CookieHorizontalSlider(
+                                    value = selectedSpeed,
                                     onValueChange = { v ->
                                         val r = (Math.round(v * 1000.0) / 1000.0).toFloat()
                                         selectedSpeed = r
                                         if (syncEnabled) selectedPitch = r
                                     },
+                                    valueRange = minVal..maxVal,
+                                    step = 0.05f,
+                                    activeTrackColor = MaterialTheme.colorScheme.primary,
+                                    inactiveTrackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                                    thumbColor = MaterialTheme.colorScheme.surface,
                                     modifier = Modifier
                                         .weight(1f)
-                                        .padding(horizontal = 8.dp),
-                                    colors = SliderDefaults.colors(
-                                        thumbColor = MaterialTheme.colorScheme.primary,
-                                        activeTrackColor = MaterialTheme.colorScheme.primary,
-                                        inactiveTrackColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                                    ),
-                                    onValueChangeFinished = {
-                                        HapticUtils.performHapticFeedback(context, haptics, HapticType.LIGHT)
-                                    }
+                                        .height(36.dp)
+                                        .padding(horizontal = 8.dp)
                                 )
                                 ExpressiveFilledTonalIconButton(
                                     onClick = {
@@ -311,13 +276,15 @@ fun PlaybackSpeedAndPitchBottomSheet(
                                 }
                             }
 
-                            Row(
+                            val speedPresetsListState = rememberLazyListState()
+                            LazyRow(
+                                state = speedPresetsListState,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .horizontalScroll(rememberScrollState()),
+                                    .horizontalEdgeBlend(lazyListState = speedPresetsListState, fadeWidth = 12.dp),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                speedPresets.forEach { preset ->
+                                items(speedPresets) { preset ->
                                     val isSelected = selectedSpeed == preset
                                     ExpressiveFilterChip(
                                         selected = isSelected,
@@ -386,31 +353,22 @@ fun PlaybackSpeedAndPitchBottomSheet(
                                         modifier = Modifier.size(18.dp)
                                     )
                                 }
-                                val pitchSliderState = remember(minVal, maxVal) {
-                                    SliderState(
-                                        value = selectedPitch,
-                                        trackRange = minVal..maxVal
-                                    )
-                                }
-                                pitchSliderState.value = selectedPitch
-                                Slider(
-                                    state = pitchSliderState,
+                                CookieHorizontalSlider(
+                                    value = selectedPitch,
                                     onValueChange = { v ->
                                         val r = (Math.round(v * 1000.0) / 1000.0).toFloat()
                                         selectedPitch = r
                                         if (syncEnabled) selectedSpeed = r
                                     },
+                                    valueRange = minVal..maxVal,
+                                    step = 0.05f,
+                                    activeTrackColor = MaterialTheme.colorScheme.secondary,
+                                    inactiveTrackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                                    thumbColor = MaterialTheme.colorScheme.surface,
                                     modifier = Modifier
                                         .weight(1f)
-                                        .padding(horizontal = 8.dp),
-                                    colors = SliderDefaults.colors(
-                                        thumbColor = MaterialTheme.colorScheme.secondary,
-                                        activeTrackColor = MaterialTheme.colorScheme.secondary,
-                                        inactiveTrackColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                                    ),
-                                    onValueChangeFinished = {
-                                        HapticUtils.performHapticFeedback(context, haptics, HapticType.LIGHT)
-                                    }
+                                        .height(36.dp)
+                                        .padding(horizontal = 8.dp)
                                 )
                                 ExpressiveFilledTonalIconButton(
                                     onClick = {
@@ -453,13 +411,15 @@ fun PlaybackSpeedAndPitchBottomSheet(
                                 }
                             }
 
-                            Row(
+                            val pitchPresetsListState = rememberLazyListState()
+                            LazyRow(
+                                state = pitchPresetsListState,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .horizontalScroll(rememberScrollState()),
+                                    .horizontalEdgeBlend(lazyListState = pitchPresetsListState, fadeWidth = 12.dp),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                pitchPresets.forEach { preset ->
+                                items(pitchPresets) { preset ->
                                     val isSelected = selectedPitch == preset
                                     ExpressiveFilterChip(
                                         selected = isSelected,
@@ -552,10 +512,11 @@ private fun SectionHeadingRow(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            ExpressiveStatusBadge(
-                label = value,
-                color = if (isModified) tint.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceContainerHighest,
-                textColor = if (isModified) tint else MaterialTheme.colorScheme.onSurfaceVariant
+            Text(
+                text = value,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = if (isModified) tint else MaterialTheme.colorScheme.onSurfaceVariant
             )
             if (isModified) {
                 ExpressiveAssistChip(

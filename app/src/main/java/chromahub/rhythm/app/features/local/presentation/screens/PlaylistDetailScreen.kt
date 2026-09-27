@@ -52,6 +52,8 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuContent
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuElevation
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortMenuShape
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmSortOption
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmDetailActionButton
 import chromahub.rhythm.app.shared.presentation.components.common.RhythmGroupedMenuContent
@@ -930,10 +932,11 @@ fun PlaylistDetailScreen(
                 DropdownMenu(
                     expanded = showSortMenu,
                     onDismissRequest = { showSortMenu = false },
-                    shape = RoundedCornerShape(20.dp),
+                    shape = RhythmSortMenuShape,
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    shadowElevation = RhythmSortMenuElevation,
                     modifier = Modifier
                         .widthIn(min = 250.dp)
-                        .background(MaterialTheme.colorScheme.surfaceContainer)
                         .padding(8.dp)
                 ) {
                     val currentKey = when (currentPlaylistSort) {
@@ -1466,7 +1469,7 @@ fun PlaylistDetailScreen(
                                             .padding(horizontal = 20.dp),
                                         shape = RoundedCornerShape(28.dp),
                                         colors = CardDefaults.cardColors(
-                                            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                                            containerColor = MaterialTheme.colorScheme.surfaceContainer
                                         )
                                     ) {
                                         Column(
@@ -1962,7 +1965,7 @@ fun PlaylistDetailScreen(
                                     .padding(horizontal = 20.dp),
                                 shape = RoundedCornerShape(28.dp),
                                 colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                                    containerColor = MaterialTheme.colorScheme.surfaceContainer
                                 )
                             ) {
                                 Column(

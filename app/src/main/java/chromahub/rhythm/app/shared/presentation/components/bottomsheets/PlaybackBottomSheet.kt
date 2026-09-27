@@ -44,10 +44,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmButtonSize
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmButtonWeighted
+import chromahub.rhythm.app.shared.presentation.components.common.RhythmGroupedButton
+import chromahub.rhythm.app.shared.presentation.components.common.horizontalEdgeBlend
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AssistChip
@@ -236,8 +241,29 @@ fun PlaybackBottomSheet(
             )
             
             Spacer(modifier = Modifier.height(16.dp))
-            
-            // Scrollable content inside AdaptiveSheetScrollContainer
+
+            AnimateIn {
+                VolumeAndDeviceCard(
+                    volume = volume,
+                    systemVolume = systemVolume,
+                    systemMaxVolume = systemMaxVolume,
+                    appSettings = appSettings,
+                    context = context,
+                    onVolumeChange = onVolumeChange,
+                    onSystemVolumeChange = { newVolume ->
+                        systemVolume = newVolume
+                    },
+                    location = currentLocation,
+                    onSwitchDevice = {
+                        musicViewModel.showOutputSwitcherDialog()
+                    },
+                    onRefreshDevices = onRefreshDevices,
+                    haptics = haptics
+                )
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             AdaptiveSheetScrollContainer(
                 lazyListState = lazyListState,
                 modifier = Modifier
@@ -250,30 +276,6 @@ fun PlaybackBottomSheet(
                     contentPadding = PaddingValues(top = 8.dp, bottom = 16.dp, end = endPadding),
                     verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
-                // Volume + Active Device (merged)
-                item {
-                    AnimateIn {
-                        VolumeAndDeviceCard(
-                            volume = volume,
-                            systemVolume = systemVolume,
-                            systemMaxVolume = systemMaxVolume,
-                            appSettings = appSettings,
-                            context = context,
-                            onVolumeChange = onVolumeChange,
-                            onSystemVolumeChange = { newVolume ->
-                                systemVolume = newVolume
-                            },
-                            location = currentLocation,
-                            onSwitchDevice = {
-                                musicViewModel.showOutputSwitcherDialog()
-                            },
-                            onRefreshDevices = onRefreshDevices,
-                            haptics = haptics
-                        )
-                    }
-                }
-
-                // Place StreamingQualityCard below the Volume control when in STREAMING mode
                 if (appMode == "STREAMING") {
                     item {
                         AnimateIn {
@@ -403,9 +405,6 @@ fun PlaybackBottomSheet(
                 musicViewModel.setPlaybackSpeed(speed)
                 musicViewModel.setPlaybackPitch(pitch)
                 showSpeedPitchSheet = false
-            },
-            onSetDefaultSpeed = { speed ->
-                musicViewModel.setDefaultPlaybackSpeed(speed)
             }
         )
     }
@@ -496,7 +495,7 @@ private fun VolumeAndDeviceCard(
         topStart = 26.dp, topEnd = 20.dp,
         bottomStart = 20.dp, bottomEnd = 30.dp
     )
-    val expressiveIconShape = rememberExpressiveShape("COOKIE_7", CircleShape)
+    val expressiveIconShape = rememberExpressiveShape("SUNNY", CircleShape)
 
     var isRefreshing by remember { mutableStateOf(false) }
     val refreshRotation by animateFloatAsState(
@@ -612,44 +611,45 @@ private fun VolumeAndDeviceCard(
 
                 Spacer(modifier = Modifier.width(8.dp))
 
-                FilledTonalIconButton(
-                    onClick = {
-                        isRefreshing = true
-                        HapticUtils.performHapticFeedback(context, haptics, HapticType.HEAVY)
-                        onRefreshDevices()
-                    },
-                    modifier = Modifier.size(34.dp),
-                    shape = RoundedCornerShape(topStart = 14.dp, topEnd = 10.dp, bottomStart = 10.dp, bottomEnd = 16.dp),
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
+                RhythmGroupedButton(
+                    size = RhythmButtonSize.Small,
+                    isFillMaxWidth = false,
+                    modifier = Modifier.widthIn(max = 92.dp)
                 ) {
-                    Icon(
-                        imageVector = RhythmIcons.Refresh,
-                        contentDescription = stringResource(R.string.content_desc_refresh_devices),
-                        modifier = Modifier
-                            .size(16.dp)
-                            .graphicsLayer { rotationZ = refreshRotation }
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                Surface(
-                    onClick = onSwitchDevice,
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(34.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
+                    RhythmButtonWeighted(
+                        onClick = {
+                            isRefreshing = true
+                            HapticUtils.performHapticFeedback(context, haptics, HapticType.HEAVY)
+                            onRefreshDevices()
+                        },
+                        weight = 1f,
+                        size = RhythmButtonSize.Small,
+                        height = 36.dp,
+                        iconSize = 18.dp,
+                        isFirst = true,
+                        isLast = false,
+                        contentDescription = stringResource(R.string.content_desc_refresh_devices)
+                    ) {
                         Icon(
-                            imageVector = MaterialSymbolIcon("sync_alt", filled = true),
-                            contentDescription = stringResource(R.string.content_desc_switch_device),
-                            tint = MaterialTheme.colorScheme.onPrimary,
-                            modifier = Modifier.size(18.dp)
+                            imageVector = RhythmIcons.Refresh,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(18.dp)
+                                .graphicsLayer { rotationZ = refreshRotation }
                         )
                     }
+
+                    RhythmButtonWeighted(
+                        onClick = onSwitchDevice,
+                        weight = 1f,
+                        size = RhythmButtonSize.Small,
+                        height = 36.dp,
+                        iconSize = 18.dp,
+                        isFirst = false,
+                        isLast = true,
+                        icon = MaterialSymbolIcon("sync_alt", filled = true),
+                        contentDescription = stringResource(R.string.content_desc_switch_device)
+                    )
                 }
             }
 
@@ -1238,10 +1238,13 @@ private fun PlaybackPitchCard(
             
             Spacer(modifier = Modifier.height(12.dp))
             
-            // Quick preset buttons
+            val pitchPresetsListState = rememberLazyListState()
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth()
+                state = pitchPresetsListState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalEdgeBlend(lazyListState = pitchPresetsListState, fadeWidth = 12.dp)
             ) {
                 items(listOf(0.5f, 0.75f, 0.8f, 0.9f, 1.0f, 1.25f, 1.5f, 2.0f, 2.5f, 3.0f)) { presetPitch ->
                     AssistChip(

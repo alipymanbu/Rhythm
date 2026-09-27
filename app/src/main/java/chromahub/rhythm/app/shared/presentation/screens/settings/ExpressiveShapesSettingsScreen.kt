@@ -49,6 +49,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import chromahub.rhythm.app.shared.presentation.components.common.horizontalEdgeBlend
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -443,8 +444,12 @@ fun ExpressiveShapesSettingsScreen(onBackClick: () -> Unit) {
                     enter = fadeIn() + expandVertically(),
                     exit = fadeOut() + shrinkVertically()
                 ) {
+                    val presetsListState = rememberLazyListState()
                     LazyRow(
-                        modifier = Modifier.fillMaxWidth(),
+                        state = presetsListState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalEdgeBlend(lazyListState = presetsListState, fadeWidth = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         contentPadding = PaddingValues(horizontal = 0.dp)
                     ) {

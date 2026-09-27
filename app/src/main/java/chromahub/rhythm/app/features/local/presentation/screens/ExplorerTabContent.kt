@@ -61,7 +61,6 @@ import chromahub.rhythm.app.shared.presentation.components.common.DataProcessing
 import chromahub.rhythm.app.shared.presentation.components.common.ExpressiveShapeTarget
 import chromahub.rhythm.app.shared.presentation.components.common.rememberExpressiveShapeFor
 import chromahub.rhythm.app.shared.presentation.components.common.ExpressiveOutlinedButton
-import chromahub.rhythm.app.shared.presentation.components.common.horizontalEdgeBlend
 import chromahub.rhythm.app.shared.presentation.theme.ExpressiveMaterialShape
 import chromahub.rhythm.app.shared.presentation.theme.rememberExpressiveShape
 import chromahub.rhythm.app.util.HapticUtils
@@ -817,7 +816,7 @@ fun SingleCardExplorerContent(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(28.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                                containerColor = MaterialTheme.colorScheme.surfaceContainer
                             )
                         ) {
                             Column(
@@ -1906,7 +1905,7 @@ fun ExplorerBreadcrumb(
     val haptics = LocalHapticFeedback.current
     val rawSegments = path.split("/").filter { it.isNotEmpty() }
 
-    val displaySegments: List<Pair<String, String>> = run {
+    val displaySegments: List<Pair<String, String>> = remember(path) {
         if (rawSegments.size >= 3 && rawSegments[0].equals("storage", true)
             && rawSegments[1].equals("emulated", true) && rawSegments[2] == "0"
         ) {
@@ -1931,21 +1930,21 @@ fun ExplorerBreadcrumb(
         }
     }
 
-    LaunchedEffect(displaySegments) {
-        if (displaySegments.isNotEmpty()) {
-            val lastIndex = (displaySegments.size * 2) + 1
-            scrollState.animateScrollToItem(lastIndex.coerceAtLeast(0))
+    LaunchedEffect(path) {
+        val segments = displaySegments
+        if (segments.isNotEmpty()) {
+            val activeChipIndex = segments.size * 2
+            scrollState.animateScrollToItem(activeChipIndex.coerceAtLeast(0))
         }
     }
 
     LazyRow(
         state = scrollState,
         modifier = modifier
-            .fillMaxWidth()
-            .horizontalEdgeBlend(lazyListState = scrollState, fadeWidth = 14.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically,
-        contentPadding = PaddingValues(horizontal = 4.dp)
+        contentPadding = PaddingValues(start = 4.dp, end = 20.dp)
     ) {
         item {
             val homeScale by animateFloatAsState(
@@ -2045,13 +2044,14 @@ fun ExplorerBreadcrumb(
                         .drawWithContent {
                             drawContent()
                             if (isLastSegment) {
-                                val inset = 14.dp.toPx()
-                                val underlineY = size.height - 1.dp.toPx()
+                                val inset = 12.dp.toPx()
+                                val stroke = 2.5.dp.toPx()
+                                val underlineY = size.height - stroke / 2f - 3.dp.toPx()
                                 drawLine(
                                     color = underlineColor,
                                     start = Offset(inset, underlineY),
                                     end = Offset(size.width - inset, underlineY),
-                                    strokeWidth = 2.dp.toPx(),
+                                    strokeWidth = stroke,
                                     cap = StrokeCap.Round
                                 )
                             }
